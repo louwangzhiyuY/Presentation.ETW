@@ -1,0 +1,105 @@
+<?xml version='1.0' encoding='utf-8' standalone='yes'?>
+<?Copyright (c) Microsoft Corporation. All rights reserved.?>
+<InstrumentationManifest>
+  <Instrumentation>
+    <Regions>
+    <!-- 
+      http://msdn.microsoft.com/en-us/library/ff356162(v=vs.110).aspx
+    -->
+     <RegionRoot Guid="{d8d639a0-cf4c-45fb-976a-0000DEADBEEF}" Name="GC" FriendlyName="GC Activity">
+      <Region Guid="{d8d639a1-cf4c-45fb-976a-100000000101}" Name="GCs" FriendlyName="GCs">
+        <Region Guid="{d8d639a1-cf4c-45fb-976a-000000000001}" Name="GCStart" FriendlyName="GC">
+          <Start>
+            <!-- A garbage collection has started. -->
+            <Event Provider="{e13c0d23-ccbc-4e12-931b-d9cc2eee27e4}" Id="1" Version="1"/>
+          </Start>
+          <Stop>
+            <!-- The garbage collection has ended. -->
+            <Event Provider="{e13c0d23-ccbc-4e12-931b-d9cc2eee27e4}" Id="2" Version="1"/>
+          </Stop>
+          <Match>
+            <Event PID="true" />
+          </Match>          
+        </Region>
+      </Region>
+      <Region Guid="{d8d639a2-cf4c-45fb-976a-000000000003}" Name="GCSuspends" FriendlyName="GC Suspensions">
+       <Region Guid="{d8d639a2-cf4c-45fb-976a-000000000002}" Name="GCSuspend" FriendlyName="GC Suspension">
+        <Start>
+          <!-- Start of suspension of the execution engine for garbage collection. -->
+          <Event Provider="{e13c0d23-ccbc-4e12-931b-d9cc2eee27e4}" Id="9" Version="1"/>
+        </Start>
+        <Stop>
+          <!-- End of suspension of the execution engine for garbage collection. -->
+          <Event Provider="{e13c0d23-ccbc-4e12-931b-d9cc2eee27e4}" Id="8" Version="1"/>
+        </Stop>
+        <Match>
+          <Event PID="true" />
+        </Match>          
+      </Region>
+    </Region>
+    <Region Guid="{d8d639a2-cf4c-45fb-976a-000000000004}" Name="GCSegments" FriendlyName="GC Segments">
+       <Region Guid="{d8d639a2-cf4c-45fb-976a-000000000005}" Name="GCSegment" FriendlyName="GC Segment">
+        <Start>
+          <!-- A new garbage collection segment has been created. In addition, when tracing is enabled on a process that is already running, this event is raised for each existing segment. -->
+          <Event Provider="{e13c0d23-ccbc-4e12-931b-d9cc2eee27e4}" Id="5" Version="1"/>
+        </Start>
+        <Stop>
+          <!-- A garbage collection segment has been released. -->
+          <Event Provider="{e13c0d23-ccbc-4e12-931b-d9cc2eee27e4}" Id="6" Version="1"/>
+        </Stop>
+        <Match>
+          <Event PID="true">
+            <Payload FieldName="ClrInstanceID" />
+          </Event>
+        </Match>          
+      </Region>
+    </Region>
+    <Region Guid="{d8d639a2-cf4c-45fb-976a-000000000006}" Name="GCFinalizations" FriendlyName="GC Finalizaitons">
+       <Region Guid="{d8d639a2-cf4c-45fb-976a-000000000007}" Name="GCFinalization" FriendlyName="GC Finalization">
+        <Start>
+          <!-- The start of running finalizers. -->
+          <Event Provider="{e13c0d23-ccbc-4e12-931b-d9cc2eee27e4}" Id="14" Version="1"/>
+        </Start>
+        <Stop>
+          <!-- The end of running finalizers. -->
+          <Event Provider="{e13c0d23-ccbc-4e12-931b-d9cc2eee27e4}" Id="13" Version="1"/>
+        </Stop>
+        <Match>
+          <Event PID="true" />
+        </Match>          
+      </Region>
+    </Region>
+    <Region Guid="{d8d639a2-cf4c-45fb-976a-000000000008}" Name="GCCreateConcurrentThreads" FriendlyName="GC Concurrent Threads">
+       <Region Guid="{d8d639a2-cf4c-45fb-976a-000000000009}" Name="GCCreateConcurrentThread" FriendlyName="GC Concurrent Thread">
+        <Start>
+          <!-- Concurrent garbage collection thread was created. -->
+          <Event Provider="{e13c0d23-ccbc-4e12-931b-d9cc2eee27e4}" Id="11" Version="1"/>
+        </Start>
+        <Stop>
+          <!-- Concurrent garbage collection thread was terminated. -->
+          <Event Provider="{e13c0d23-ccbc-4e12-931b-d9cc2eee27e4}" Id="12" Version="1"/>
+        </Stop>
+        <Match>
+          <Event PID="true" />
+        </Match>          
+      </Region>
+    </Region>
+    <Region Guid="{d8d639a2-cf4c-45fb-976a-000000000010}" Name="GCRestartsEE" FriendlyName="GC EE Restarts">
+       <Region Guid="{d8d639a2-cf4c-45fb-976a-000000000011}" Name="GCRestartEE" FriendlyName="GC EE Restart">
+        <Start>
+          <!-- Resumption from common language runtime suspension has begun. -->
+          <Event Provider="{e13c0d23-ccbc-4e12-931b-d9cc2eee27e4}" Id="7" Version="1"/>
+        </Start>
+        <Stop>
+          <!-- Resumption from common language runtime suspension has ended. -->
+          <Event Provider="{e13c0d23-ccbc-4e12-931b-d9cc2eee27e4}" Id="3" Version="1"/>
+        </Stop>
+        <Match>
+          <Event PID="true" />
+        </Match>          
+      </Region>
+    </Region>
+  </RegionRoot>
+</Regions>
+</Instrumentation>
+</InstrumentationManifest>

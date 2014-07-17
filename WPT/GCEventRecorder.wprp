@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WindowsPerformanceRecorder Version="1.0">
+  <Profiles>
+    <EventCollector Id="EventCollector_MyEventSource" Name="GC">
+      <BufferSize Value="2048" />
+      <Buffers Value="1024" />
+    </EventCollector>
+    <EventProvider Id=".NETCommonLanguageRuntimeGCTracking" Name="e13c0d23-ccbc-4e12-931b-d9cc2eee27e4" >
+     <Keywords>
+     <!-- 
+	GC 0x1 and 0x8000 Exceptions  
+	http://msdn.microsoft.com/en-us/library/dd264810(v=vs.110).aspx
+     -->
+     <Keyword Value="8001"/>
+     </Keywords>
+    </EventProvider>
+    <Profile Id="GC.Verbose.File" Name="GC" Description=".NET GC Tracking"  Base="" LoggingMode="File" DetailLevel="Verbose">
+      <Collectors Operation="Add">
+        <SystemCollectorId Value="SystemCollector_WPRSystemCollectorInFile">
+          <SystemProviderId Value="SystemProvider_Base"/>
+        </SystemCollectorId>
+        <EventCollectorId Value="EventCollector_MyEventSource">
+          <EventProviders>
+            <EventProviderId Value=".NETCommonLanguageRuntimeGCTracking" />
+            <EventProviderId Value="EventProvider_DotNetProvider" />
+          </EventProviders>
+        </EventCollectorId>
+      </Collectors>
+    </Profile>
+    <Profile Id="GC.Verbose.Memory" Name="GC" Description=".NET GC Tracking" Base="GC.Verbose.File" LoggingMode="Memory" DetailLevel="Verbose" />    
+  </Profiles>
+</WindowsPerformanceRecorder>
