@@ -7,3 +7,5 @@ Resources
 PerfView - [http://www.microsoft.com/en-us/download/details.aspx?id=28567](http://www.microsoft.com/en-us/download/details.aspx?id=28567)
 
 Windows Performance Toolkit - [http://msdn.microsoft.com/en-us/windows/desktop/bg162891.aspx](http://msdn.microsoft.com/en-us/windows/desktop/bg162891.aspx)
+
+Presentation - https://speakerdeck.com/shchahrykovich/etw-tracing-done-right
